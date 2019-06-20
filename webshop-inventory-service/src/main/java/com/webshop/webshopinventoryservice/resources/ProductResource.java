@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/inventory")
-public class InventoryService {
+public class ProductResource {
 
     @RequestMapping("")
     public List<Product> getProducts() {
