@@ -19,4 +19,9 @@ public class PromotionResource {
         return promotions;
     }
 
+    @RequestMapping("/{storeId")
+    public List<Promotion> getPromotionsByStore() {
+        return null;
+    }
+
 }
