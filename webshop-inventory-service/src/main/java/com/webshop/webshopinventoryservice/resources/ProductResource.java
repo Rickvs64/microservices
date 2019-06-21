@@ -2,6 +2,7 @@ package com.webshop.webshopinventoryservice.resources;
 
 import com.webshop.webshopinventoryservice.domains.Product;
 import com.webshop.webshopinventoryservice.domains.Store;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -13,6 +14,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/product")
 public class ProductResource {
+
+    @Autowired
+    private RestTemplate rs;
 
     /**
      * Get ALL existing products with their current promotions and stores/
@@ -96,7 +100,6 @@ public class ProductResource {
      * @return List of all existing stores.
      */
     private List<Store> loadStoresFromStoreService() {
-        RestTemplate rs = new RestTemplate();
         return Arrays.asList(rs.getForObject("http://localhost:8083/store", Store[].class));
     }
 
