@@ -2,25 +2,25 @@ package com.webshop.webshoppromotionsservice.domain;
 
 public class Promotion {
 
-    private String storeId;
+    private String storeName;
     private double priceReduction;
     private String code;
 
     public Promotion() {
     }
 
-    public Promotion(String storeId, double priceReduction, String code) {
-        this.storeId = storeId;
+    public Promotion(String storeName, double priceReduction, String code) {
+        this.storeName = storeName;
         this.priceReduction = priceReduction;
         this.code = code;
     }
 
-    public String getStoreId() {
-        return storeId;
+    public String getStoreName() {
+        return storeName;
     }
 
-    public void setStoreId(String storeId) {
-        this.storeId = storeId;
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
     }
 
     public double getPriceReduction() {

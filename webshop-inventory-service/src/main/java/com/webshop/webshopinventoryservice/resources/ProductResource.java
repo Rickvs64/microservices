@@ -15,7 +15,7 @@ public class ProductResource {
 
     /**
      * Get ALL existing products with their current promotions and stores
-     * @return
+     * @return List of products.
      */
     @RequestMapping("")
     public List<Product> getProducts() {
@@ -27,14 +27,16 @@ public class ProductResource {
         List<Store> stores = generateDummyStores();
 
         // Iterate through each product to add store info
+        for (Product p: products) {
 
+        }
 
         return products;
     }
 
     /**
      * Development method for generating two dummy stores (Jumbo and Coolblue).
-     * @return
+     * @return Jumbo and Coolblue dummy data.
      */
     private List<Store> generateDummyStores() {
         List<Store> stores = new ArrayList<>();
@@ -42,6 +44,15 @@ public class ProductResource {
         stores.add(new Store("Coolblue", Arrays.asList("4", "5", "6")));
 
         return stores;
+    }
+
+    private boolean doesStoreHaveInStock(Product p, Store s) {
+        for (String productId: s.getAvailableProducts()) {
+            if (productId.equals(p.getName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

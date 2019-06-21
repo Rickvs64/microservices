@@ -4,14 +4,14 @@ import java.util.List;
 
 public class Store {
     private String name;
-    private List<String> availableProductIds;
+    private List<String> availableProducts;
 
     public Store() {
     }
 
-    public Store(String name, List<String> availableProductIds) {
+    public Store(String name, List<String> availableProducts) {
         this.name = name;
-        this.availableProductIds = availableProductIds;
+        this.availableProducts = availableProducts;
     }
 
     public String getName() {
@@ -22,11 +22,11 @@ public class Store {
         this.name = name;
     }
 
-    public List<String> getAvailableProductIds() {
-        return availableProductIds;
+    public List<String> getAvailableProducts() {
+        return availableProducts;
     }
 
-    public void setAvailableProductIds(List<String> availableProductIds) {
-        this.availableProductIds = availableProductIds;
+    public void setAvailableProducts(List<String> availableProducts) {
+        this.availableProducts = availableProducts;
     }
 }
