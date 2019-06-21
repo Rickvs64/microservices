@@ -14,16 +14,13 @@ import java.util.List;
 public class ProductResource {
 
     /**
-     * Get ALL existing products with their current promotions and stores
+     * Get ALL existing products with their current promotions and stores/
      * @return List of products.
      */
     @RequestMapping("")
     public List<Product> getProducts() {
         // Get all products
-        List<Product> products = new ArrayList<>();
-        products.add(new Product("Snickers", "Individually wrapped.", 0.8));
-        products.add(new Product("Bounty", "Individually wrapped.", 0.6));
-        products.add(new Product("Laptop", "Individually wrapped.", 400.0));
+        List<Product> products = generateDummyProducts();
 
         // Let's pretend we get this data from store-service
         List<Store> stores = generateDummyStores();
@@ -41,6 +38,18 @@ public class ProductResource {
     }
 
     /**
+     * Get ALL existing products but WITHOUT any microservice communication.
+     * @return List of products, not containing external info (stores, promotions).
+     */
+    @RequestMapping("/local")
+    public List<Product> getProductsLocal() {
+        // Get all products
+        List<Product> products = generateDummyProducts();
+
+        return products;
+    }
+
+    /**
      * Development method for generating two dummy stores (Jumbo and Coolblue).
      * @return Jumbo and Coolblue dummy data.
      */
@@ -50,6 +59,19 @@ public class ProductResource {
         stores.add(new Store("Coolblue", Arrays.asList("Mouse", "Keyboard", "Laptop", "Tablet")));
 
         return stores;
+    }
+
+    /**
+     * Development method for generating dummy products.
+     * @return Dummy products (Candy bars and hardware).
+     */
+    private List<Product> generateDummyProducts() {
+        List<Product> products = new ArrayList<>();
+        products.add(new Product("Snickers", "Individually wrapped.", 0.8));
+        products.add(new Product("Bounty", "Individually wrapped.", 0.6));
+        products.add(new Product("Laptop", "Not designed for gaming.", 400.0));
+
+        return products;
     }
 
     /**
