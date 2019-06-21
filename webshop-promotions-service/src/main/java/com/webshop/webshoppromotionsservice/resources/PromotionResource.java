@@ -14,7 +14,7 @@ public class PromotionResource {
     @RequestMapping("")
     public List<Promotion> getPromotions() {
         List<Promotion> promotions = new ArrayList<>();
-        promotions.add(new Promotion("1", 0.2, "20PERCENTOFF"));
+        promotions.add(new Promotion("Jumbo", 0.2, "20PERCENTOFF"));
 
         return promotions;
     }

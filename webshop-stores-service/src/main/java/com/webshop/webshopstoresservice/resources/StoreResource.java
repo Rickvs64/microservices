@@ -12,20 +12,31 @@ import java.util.List;
 @RequestMapping("/store")
 public class StoreResource {
 
+    /**
+     * Get all existing stores.
+     * @return List of stores and their products in stock.
+     */
     @RequestMapping("")
     public List<Store> getStores() {
         List<Store> stores = new ArrayList<>();
-        List<String> productIds = new ArrayList<>();
+        List<String> products = new ArrayList<>();
 
-        productIds.add("1");
-        productIds.add("2");
-        stores.add(new Store("Jumbo", productIds));
+        products.add("Snickers");
+        products.add("Mars");
+        products.add("Bounty");
+        products.add("Twix");
+        stores.add(new Store("Jumbo", products));
 
         return stores;
     }
 
-    @RequestMapping("/{productId}")
-    public List<Store> getStoresByProduct(@PathVariable("productId") String productId) {
+    /**
+     * List of stores that have a specific product in stock.
+     * @param productName Name of product.
+     * @return List of stores.
+     */
+    @RequestMapping("/{productName}")
+    public List<Store> getStoresByProduct(@PathVariable("productName") String productName) {
         return null;
     }
 

@@ -4,6 +4,7 @@ import com.webshop.webshopinventoryservice.domains.Product;
 import com.webshop.webshopinventoryservice.domains.Store;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,13 +20,13 @@ public class ProductResource {
      */
     @RequestMapping("")
     public List<Product> getProducts() {
-        // Get all products
+        // Get all products.
         List<Product> products = generateDummyProducts();
 
-        // Let's pretend we get this data from store-service
-        List<Store> stores = generateDummyStores();
+        // REST GET call to stores-service.
+        List<Store> stores = loadStoresFromStoreService();
 
-        // Iterate through each product to add store info if available
+        // Iterate through each product to add store info if available.
         for (Product p: products) {
             for (Store s: stores) {
                 if (doesStoreHaveInStock(p, s)) {
@@ -87,6 +88,16 @@ public class ProductResource {
             }
         }
         return false;
+    }
+
+    /**
+     * Get all existing stores from stores-service.
+     * REST communication.
+     * @return List of all existing stores.
+     */
+    private List<Store> loadStoresFromStoreService() {
+        RestTemplate rs = new RestTemplate();
+        return Arrays.asList(rs.getForObject("http://localhost:8083/store", Store[].class));
     }
 
 }
