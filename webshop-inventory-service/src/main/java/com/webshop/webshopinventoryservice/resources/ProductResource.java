@@ -22,13 +22,19 @@ public class ProductResource {
         // Get all products
         List<Product> products = new ArrayList<>();
         products.add(new Product("Snickers", "Individually wrapped.", 0.8));
+        products.add(new Product("Bounty", "Individually wrapped.", 0.6));
+        products.add(new Product("Laptop", "Individually wrapped.", 400.0));
 
         // Let's pretend we get this data from store-service
         List<Store> stores = generateDummyStores();
 
-        // Iterate through each product to add store info
+        // Iterate through each product to add store info if available
         for (Product p: products) {
-
+            for (Store s: stores) {
+                if (doesStoreHaveInStock(p, s)) {
+                    p.getStores().add(s);
+                }
+            }
         }
 
         return products;
@@ -40,12 +46,18 @@ public class ProductResource {
      */
     private List<Store> generateDummyStores() {
         List<Store> stores = new ArrayList<>();
-        stores.add(new Store("Jumbo", Arrays.asList("1", "2", "3")));
-        stores.add(new Store("Coolblue", Arrays.asList("4", "5", "6")));
+        stores.add(new Store("Jumbo", Arrays.asList("Snickers", "Mars", "Bounty", "Twix")));
+        stores.add(new Store("Coolblue", Arrays.asList("Mouse", "Keyboard", "Laptop", "Tablet")));
 
         return stores;
     }
 
+    /**
+     * Check whether a particular store has a specific product in stock.
+     * @param p Product in stock.
+     * @param s Store to search in.
+     * @return True or false depending on product availability.
+     */
     private boolean doesStoreHaveInStock(Product p, Store s) {
         for (String productId: s.getAvailableProducts()) {
             if (productId.equals(p.getName())) {
