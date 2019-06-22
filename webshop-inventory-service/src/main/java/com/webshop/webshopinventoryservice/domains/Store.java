@@ -3,8 +3,10 @@ package com.webshop.webshopinventoryservice.domains;
 import java.util.List;
 
 public class Store {
+
     private String name;
     private List<String> availableProducts;
+    private List<Promotion> availablePromotions;
 
     public Store() {
     }
@@ -28,5 +30,13 @@ public class Store {
 
     public void setAvailableProducts(List<String> availableProducts) {
         this.availableProducts = availableProducts;
+    }
+
+    public List<Promotion> getAvailablePromotions() {
+        return availablePromotions;
+    }
+
+    public void setAvailablePromotions(List<Promotion> availablePromotions) {
+        this.availablePromotions = availablePromotions;
     }
 }

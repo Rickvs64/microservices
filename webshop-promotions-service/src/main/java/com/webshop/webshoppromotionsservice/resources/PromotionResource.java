@@ -29,10 +29,22 @@ public class PromotionResource {
      */
     @RequestMapping("/{storeName")
     public List<Promotion> getPromotionsByStore(@PathVariable("storeName") String storeName) {
+        List<Promotion> allPromotions = generateDummyPromotions();
+        List<Promotion> relevantPromotions = new ArrayList<>();
 
-        return null;
+        for (Promotion p: allPromotions) {
+            if (p.getStoreName().equals(storeName)) {
+                relevantPromotions.add(p);
+            }
+        }
+
+        return relevantPromotions;
     }
 
+    /**
+     * Generate dummy promotions (for Jumbo and Coolblue).
+     * @return List of promotions.
+     */
     private List<Promotion> generateDummyPromotions() {
         List<Promotion> promotions = new ArrayList<>();
         promotions.add(new Promotion("Jumbo", 0.2, "JUMBO20PERCENTOFF"));
