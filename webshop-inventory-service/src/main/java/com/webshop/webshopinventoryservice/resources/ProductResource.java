@@ -105,12 +105,19 @@ public class ProductResource {
      * @return List of all existing stores.
      */
     private List<Store> loadStoresFromStoreService() {
-        return Arrays.asList(wb.build()
-                .get()
-                .uri("http://localhost:8083/store")
-                .retrieve()
-                .bodyToMono(Store[].class)
-                .block());
+        try {
+            return Arrays.asList(wb.build()
+                    .get()
+                    .uri("http://localhost:8083/store")
+                    .retrieve()
+                    .bodyToMono(Store[].class)
+                    .block());
+        }
+        catch (Exception e) {
+            System.out.println(e);
+            return new ArrayList<>();
+        }
+
     }
 
 }

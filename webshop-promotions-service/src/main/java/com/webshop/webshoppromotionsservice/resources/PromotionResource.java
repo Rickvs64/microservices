@@ -18,9 +18,7 @@ public class PromotionResource {
      */
     @RequestMapping("")
     public List<Promotion> getPromotions() {
-        List<Promotion> promotions = new ArrayList<>();
-        promotions.add(new Promotion("Jumbo", 0.2, "20PERCENTOFF"));
-
+        List<Promotion> promotions = generateDummyPromotions();
         return promotions;
     }
 
@@ -31,7 +29,17 @@ public class PromotionResource {
      */
     @RequestMapping("/{storeName")
     public List<Promotion> getPromotionsByStore(@PathVariable("storeName") String storeName) {
+
         return null;
+    }
+
+    private List<Promotion> generateDummyPromotions() {
+        List<Promotion> promotions = new ArrayList<>();
+        promotions.add(new Promotion("Jumbo", 0.2, "JUMBO20PERCENTOFF"));
+        promotions.add(new Promotion("Jumbo", 0.3, "JUMBO30PERCENTOFF"));
+        promotions.add(new Promotion("Coolblue", 0.1, "COOLBLUE10PERCENTOFF"));
+
+        return promotions;
     }
 
 }
