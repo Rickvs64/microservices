@@ -27,9 +27,9 @@ public class StoreResource {
     public List<Store> getStores() {
         List<Store> stores = generateDummyStores();
 
-        // Fill stores with promotions data
+        // Fill stores with promotions data from promotions service.
         for (Store s: stores) {
-
+            s.setAvailablePromotions(loadPromotionsFromPromotionService(s.getName()));
         }
 
         return stores;

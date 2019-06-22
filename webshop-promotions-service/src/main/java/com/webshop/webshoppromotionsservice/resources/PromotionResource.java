@@ -27,7 +27,7 @@ public class PromotionResource {
      * @param storeName Store to search relevant promotions for.
      * @return List of promotions.
      */
-    @RequestMapping("/{storeName")
+    @RequestMapping("/{storeName}")
     public List<Promotion> getPromotionsByStore(@PathVariable("storeName") String storeName) {
         List<Promotion> allPromotions = generateDummyPromotions();
         List<Promotion> relevantPromotions = new ArrayList<>();
