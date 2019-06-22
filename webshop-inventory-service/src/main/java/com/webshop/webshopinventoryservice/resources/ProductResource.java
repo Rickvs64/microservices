@@ -3,9 +3,11 @@ package com.webshop.webshopinventoryservice.resources;
 import com.webshop.webshopinventoryservice.domains.Product;
 import com.webshop.webshopinventoryservice.domains.Store;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +19,9 @@ public class ProductResource {
 
     @Autowired
     private RestTemplate rs;
+
+    @Autowired
+    private WebClient.Builder wb;   // Apparently there's already a DefaultConfiguration class supplying this bean.
 
     /**
      * Get ALL existing products with their current promotions and stores/
@@ -68,7 +73,7 @@ public class ProductResource {
 
     /**
      * Development method for generating dummy products.
-     * @return Dummy products (Candy bars and hardware).
+     * @return Dummy products (candy bars and hardware).
      */
     private List<Product> generateDummyProducts() {
         List<Product> products = new ArrayList<>();
@@ -100,7 +105,12 @@ public class ProductResource {
      * @return List of all existing stores.
      */
     private List<Store> loadStoresFromStoreService() {
-        return Arrays.asList(rs.getForObject("http://localhost:8083/store", Store[].class));
+        return Arrays.asList(wb.build()
+                .get()
+                .uri("http://localhost:8083/store")
+                .retrieve()
+                .bodyToMono(Store[].class)
+                .block());
     }
 
 }
