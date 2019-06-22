@@ -18,15 +18,7 @@ public class StoreResource {
      */
     @RequestMapping("")
     public List<Store> getStores() {
-        List<Store> stores = new ArrayList<>();
-        List<String> products = new ArrayList<>();
-
-        products.add("Snickers");
-        products.add("Mars");
-        products.add("Bounty");
-        products.add("Twix");
-        stores.add(new Store("Jumbo", products));
-
+        List<Store> stores = generateDummyStores();
         return stores;
     }
 
@@ -38,6 +30,30 @@ public class StoreResource {
     @RequestMapping("/{productName}")
     public List<Store> getStoresByProduct(@PathVariable("productName") String productName) {
         return null;
+    }
+
+    /**
+     * Generate dummy stores with products in stock (Jumbo and Coolblue).
+     * @return List of stores with products.
+     */
+    public List<Store> generateDummyStores() {
+        List<Store> stores = new ArrayList<>();
+        List<String> products = new ArrayList<>();
+        List<String> products2 = new ArrayList<>();
+
+        products.add("Snickers");
+        products.add("Mars");
+        products.add("Bounty");
+        products.add("Twix");
+        stores.add(new Store("Jumbo", products));
+
+        products2.add("Mouse");
+        products2.add("Keyboard");
+        products2.add("Laptop");
+        products2.add("Tablet");
+        stores.add(new Store("Coolblue", products2));
+
+        return stores;
     }
 
 }

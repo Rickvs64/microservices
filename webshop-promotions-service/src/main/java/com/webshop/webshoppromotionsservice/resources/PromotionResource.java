@@ -1,6 +1,6 @@
 package com.webshop.webshoppromotionsservice.resources;
 
-import com.webshop.webshoppromotionsservice.domain.Promotion;
+import com.webshop.webshoppromotionsservice.domains.Promotion;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

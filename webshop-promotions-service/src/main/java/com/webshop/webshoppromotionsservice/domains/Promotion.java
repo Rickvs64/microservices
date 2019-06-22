@@ -1,4 +1,4 @@
-package com.webshop.webshoppromotionsservice.domain;
+package com.webshop.webshoppromotionsservice.domains;
 
 public class Promotion {
 
