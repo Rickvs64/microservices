@@ -91,12 +91,7 @@ public class ProductResource {
      * @return True or false depending on product availability.
      */
     private boolean doesStoreHaveInStock(Product p, Store s) {
-        for (String productName: s.getAvailableProducts()) {
-            if (productName.equals(p.getName())) {
-                return true;
-            }
-        }
-        return false;
+        return (s.getAvailableProducts().contains(p.getName()));
     }
 
     /**
