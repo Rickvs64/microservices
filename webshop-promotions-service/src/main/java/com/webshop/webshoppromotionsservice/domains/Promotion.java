@@ -1,9 +1,14 @@
 package com.webshop.webshoppromotionsservice.domains;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Promotion {
 
     private String storeName;
     private double priceReduction;
+    @Id
     private String code;
 
     public Promotion() {
