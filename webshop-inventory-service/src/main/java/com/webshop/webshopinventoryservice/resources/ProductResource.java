@@ -20,6 +20,7 @@ public class ProductResource {
     @Autowired
     private RestTemplate rs;
 
+    @Qualifier("getWebClientBuilder")
     @Autowired
     private WebClient.Builder wb;   // Apparently there's already a DefaultConfiguration class supplying this bean.
 
@@ -103,7 +104,7 @@ public class ProductResource {
         try {
             return Arrays.asList(wb.build()
                     .get()
-                    .uri("http://localhost:8083/store")
+                    .uri("http://stores-service/store")
                     .retrieve()
                     .bodyToMono(Store[].class)
                     .block());

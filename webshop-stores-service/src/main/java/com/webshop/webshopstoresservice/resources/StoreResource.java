@@ -3,6 +3,7 @@ package com.webshop.webshopstoresservice.resources;
 import com.webshop.webshopstoresservice.domains.Promotion;
 import com.webshop.webshopstoresservice.domains.Store;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import java.util.List;
 @RequestMapping("/store")
 public class StoreResource {
 
+    @Qualifier("getWebClientBuilder")
     @Autowired
     private WebClient.Builder wb;
 
@@ -79,7 +81,7 @@ public class StoreResource {
         try {
             return Arrays.asList(wb.build()
                     .get()
-                    .uri("http://localhost:8082/promotion/" + storeName)
+                    .uri("http://promotions-service/promotion/" + storeName)
                     .retrieve()
                     .bodyToMono(Promotion[].class)
                     .block());
