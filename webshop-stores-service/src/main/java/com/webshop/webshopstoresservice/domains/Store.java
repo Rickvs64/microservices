@@ -1,6 +1,9 @@
 package com.webshop.webshopstoresservice.domains;
 
-import javax.persistence.*;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.util.List;
 
 @Entity
