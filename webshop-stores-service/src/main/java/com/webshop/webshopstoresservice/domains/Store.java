@@ -1,11 +1,16 @@
 package com.webshop.webshopstoresservice.domains;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
 public class Store {
 
+    @Id
     private String name;
+    @ElementCollection
     private List<String> availableProducts;
+    @Transient
     private List<Promotion> availablePromotions;
 
     public Store() {

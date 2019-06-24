@@ -1,22 +1,30 @@
 package com.webshop.webshopinventoryservice.domains;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Product {
 
+    @Id
     private String name;
-    private String desc;
+    private String description;
     private double basePrice;
+    @Transient
     private double actualPrice;     // Not stored, automatically filled in.
+    @Transient
     private List<Store> stores;     // Not stored, automatically filled in.
 
     public Product() {
+        stores = new ArrayList<>();
     }
 
-    public Product(String name, String desc, double basePrice) {
+    public Product(String name, String description, double basePrice) {
         this.name = name;
-        this.desc = desc;
+        this.description = description;
         this.basePrice = basePrice;
         this.actualPrice = basePrice;   // Set to default price if no promotions are found.
 
@@ -31,12 +39,12 @@ public class Product {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public double getBasePrice() {

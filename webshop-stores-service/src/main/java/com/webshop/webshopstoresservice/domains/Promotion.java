@@ -1,5 +1,7 @@
 package com.webshop.webshopstoresservice.domains;
 
+import java.beans.Transient;
+
 public class Promotion {
 
     private String storeName;

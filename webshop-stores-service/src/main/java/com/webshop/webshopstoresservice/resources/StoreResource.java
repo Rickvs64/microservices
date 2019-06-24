@@ -2,6 +2,7 @@ package com.webshop.webshopstoresservice.resources;
 
 import com.webshop.webshopstoresservice.domains.Promotion;
 import com.webshop.webshopstoresservice.domains.Store;
+import com.webshop.webshopstoresservice.repositories.IStoreRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,13 +22,18 @@ public class StoreResource {
     @Autowired
     private WebClient.Builder wb;
 
+    @Autowired
+    private IStoreRepo storeRepo;
+
     /**
      * Get all existing stores.
      * @return List of stores and their products in stock.
      */
     @RequestMapping("")
     public List<Store> getStores() {
-        List<Store> stores = generateDummyStores();
+        // findAll() returns an Iterable so we manually convert to List.
+        List<Store> stores = new ArrayList<>();
+        storeRepo.findAll().forEach(stores::add);
 
         // Fill stores with promotions data from promotions service.
         for (Store s: stores) {
@@ -51,7 +57,7 @@ public class StoreResource {
      * Generate dummy stores with products in stock (Jumbo and Coolblue).
      * @return List of stores with products.
      */
-    public List<Store> generateDummyStores() {
+    private List<Store> generateDummyStores() {
         List<Store> stores = new ArrayList<>();
         List<String> products = new ArrayList<>();
         List<String> products2 = new ArrayList<>();

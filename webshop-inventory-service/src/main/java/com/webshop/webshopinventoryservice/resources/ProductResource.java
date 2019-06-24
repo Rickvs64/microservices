@@ -2,6 +2,7 @@ package com.webshop.webshopinventoryservice.resources;
 
 import com.webshop.webshopinventoryservice.domains.Product;
 import com.webshop.webshopinventoryservice.domains.Store;
+import com.webshop.webshopinventoryservice.repositories.IProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,7 @@ import java.util.List;
 public class ProductResource {
 
     @Autowired
-    private RestTemplate rs;
+    private IProductRepo productRepo;
 
     @Qualifier("getWebClientBuilder")
     @Autowired
@@ -31,7 +32,9 @@ public class ProductResource {
     @RequestMapping("")
     public List<Product> getProducts() {
         // Get all products.
-        List<Product> products = generateDummyProducts();
+        // findAll() returns an Iterable so we manually convert to List.
+        List<Product> products = new ArrayList<>();
+        productRepo.findAll().forEach(products::add);
 
         // REST GET call to stores-service.
         List<Store> stores = loadStoresFromStoreService();
@@ -54,8 +57,10 @@ public class ProductResource {
      */
     @RequestMapping("/local")
     public List<Product> getProductsLocal() {
-        // Get all products
-        List<Product> products = generateDummyProducts();
+        // Get all products.
+        // findAll() returns an Iterable so we manually convert to List.
+        List<Product> products = new ArrayList<>();
+        productRepo.findAll().forEach(products::add);
 
         return products;
     }
