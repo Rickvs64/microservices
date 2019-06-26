@@ -1,4 +1,4 @@
-# microservices
+# Microservices
 
 Sample application that searches stores for their inventory and available coupon codes.
 Made with Spring Boot and Eureka.
@@ -20,4 +20,4 @@ Personally I find server-side a more logical (and safer) approach, thus having t
 * It would be possible to introduce basic authentication but users have reported issues with my current Spring Cloud version: Greenwich.SR1 (https://stackoverflow.com/questions/50971891/how-to-secure-spring-cloud-eureka-service-with-basic-auth).
 
 Scaling:
-Eureka features basic client-side load balancing out of the box. Right now this application expects only one Eureka cluster; multiple can be used later down the line.
+Eureka features basic client-side load balancing out of the box. Right now this application expects only one Eureka instance; multiple clusters can be used later down the line.
